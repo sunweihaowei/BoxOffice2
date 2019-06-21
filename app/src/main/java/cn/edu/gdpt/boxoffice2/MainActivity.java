@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private int[] pieData=new int[]{
+            10,20,30,35,5,
             10,20,30,35,5
     };
     private int[] color=new int[]{
@@ -59,10 +60,15 @@ public class MainActivity extends AppCompatActivity {
             Color.parseColor( "#b53633" ),
             Color.parseColor( "#86aa3d" ),
             Color.parseColor( "#6a4b90" ),
+            Color.parseColor( "#2e9cba" ),
+            Color.parseColor( "#356fb3" ),
+            Color.parseColor( "#b53633" ),
+            Color.parseColor( "#86aa3d" ),
+            Color.parseColor( "#6a4b90" ),
             Color.parseColor( "#2e9cba" )
     };
     List<SliceValue> sliceValues=new ArrayList <>(  );
-    private String[] stateChar={"高等教育1","高等教育2","高等教育3","高等教育4","高等教育5"};
+    private String[] stateChar;
     private PieChartData data;
 
 
@@ -89,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
+
                 if (msg.what == 1) {
                     String json = (String) msg.obj;
                     Gson gson = new Gson();
@@ -113,10 +120,19 @@ public class MainActivity extends AppCompatActivity {
                         map.put("SumBoxOffice", SumBoxOffice);
                         mapList.add(map);
                     }
+                    stateChar=new String[]{
+                            mapList.get( 0 ).get( "Name" ).toString(),
+                            mapList.get( 1 ).get( "Name" ).toString(),
+                            mapList.get( 2 ).get( "Name" ).toString(),
+                            mapList.get( 3 ).get( "Name" ).toString(),
+                            mapList.get( 4 ).get( "Name" ).toString(),
+                            mapList.get( 5 ).get( "Name" ).toString(),
+                            mapList.get( 6 ).get( "Name" ).toString(),
+                            mapList.get( 7 ).get( "Name" ).toString(),
+                            mapList.get( 8 ).get( "Name" ).toString(),
+                            mapList.get( 9 ).get( "Name" ).toString()
+                    };
                     tv_sumBoxOffice.setText(realTimeBoxOffice);
-
-
-
                     for (int i=0;i<pieData.length;i++){
                         SliceValue sliceValue=new SliceValue( pieData[i],color[i] );
                         sliceValues.add( sliceValue );
@@ -131,11 +147,13 @@ public class MainActivity extends AppCompatActivity {
                     data.setHasLabelsOnlyForSelected( true );//这个表示是否选中时才显示数据，true为选中时才有数据
                     data.setHasLabelsOutside( false );//这个表示数据是否显示在外面
                     data.setValues(sliceValues);//这个表示为PieChartData建立数据（List类型数据）
+                    data.setCenterText1FontSize( 20 );
 
                     pcv.setPieChartData( data );
                     pcv.setValueSelectionEnabled( true );//是否可以选择，true为可以且会变大
                     pcv.setAlpha( 0.9f );//透明度
                     pcv.setCircleFillRatio( 1 );//设置相对于view大小，默认为全部
+
                     final PieChartOnValueSelectListener pieChartOnValueSelectListener=new PieChartOnValueSelectListener() {
                         @Override
                         public void onValueSelected(int i, SliceValue sliceValue) {//i表示点击的那一项，slicevalue为点击的那个的值
