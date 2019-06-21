@@ -86,9 +86,9 @@ public class guideActivity extends AppCompatActivity {
                     case 2:
                         tv_hello.setVisibility( View.INVISIBLE );
                         tv_hint.setVisibility( View.VISIBLE );
-                       /* Animation animation = AnimationUtils.loadAnimation( guideActivity.this, R.anim.all_animation );
+                       Animation animation = AnimationUtils.loadAnimation( guideActivity.this, R.anim.all_animation );
                         tv_hint.setAnimation( animation );
-                        animation.start();*/
+                        animation.start();
                         SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString( "name", "jjj" );
                         edit.commit();
