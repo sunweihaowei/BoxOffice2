@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private List<View> viewList=new ArrayList<>();
     private List<String> nameList=new ArrayList<>();
     private String[] names=new String[]{"饼状图","条形图","线形图"};
+
     /*private PullToRefreshView pulltorefreshView;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {

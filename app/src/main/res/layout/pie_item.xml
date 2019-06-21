@@ -8,7 +8,7 @@
         android:text="各票房占比"
         android:textSize="30dp"
         />
-  <lecho.lib.hellocharts.view.ColumnChartView
+  <lecho.lib.hellocharts.view.PieChartView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/pie"/>
