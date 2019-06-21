@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     String realTimeBoxOffice = main.getShowapi_res_body().getRealTimeRank().getRealTimeBoxOffice();
                     for (int i = 0; i < 10; i++) {
                         String boxOffice = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxOffice();
-                        String BoxPercent = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxPercent();
+                        float BoxPercent = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxPercent();
                         String Name = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getName();
                         String Rank = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getRank();
                         String ShowDay = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getShowDay();
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     tv_sumBoxOffice.setText(realTimeBoxOffice);
                     MyAdapter adapter = new MyAdapter(MainActivity.this, mapList);
                     lv.setAdapter(adapter);
+
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -97,23 +98,22 @@ public class MainActivity extends AppCompatActivity {
                             ll_main.setVisibility(View.GONE);
                         }
                     });
-
-
                 }
             }
         };
         getjson();
+        initcontent();
+    }
 
+    private void initcontent() {
         tb.addTab(tb.newTab().setText(nameList.get(0)));
         tb.addTab(tb.newTab().setText(nameList.get(1)));
         tb.addTab(tb.newTab().setText(nameList.get(2)));
-
-        pagerAdapter=new pagerAdapter(MainActivity.this,viewList,nameList);
+        pagerAdapter=new pagerAdapter( MainActivity.this,viewList,nameList);
         vp.setAdapter(pagerAdapter);
         tb.setupWithViewPager(vp);
-
-
     }
+
     private void getjson() {
         new Thread() {
             @Override
