@@ -40,6 +40,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
+                android:background="@android:color/holo_red_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingVertical="10dp">
+                    android:paddingVertical="10dp"
+                    android:background="@android:color/holo_blue_dark">
                     <TextView
                         android:id="@+id/power"
                         android:layout_width="50dp"
@@ -132,10 +134,68 @@
                 android:id="@+id/lv"></ListView>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="100dp"
+            android:background="@drawable/guide4"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="start"></LinearLayout>
+            android:layout_gravity="start"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="其他查询"
+                android:textSize="50dp"
+                android:textColor="@android:color/black"/>
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="单日票房"
+                android:id="@+id/dayBoxOffice"
+                />
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="单周票房"
+                android:id="@+id/weekBoxOffice"
+                />
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="周末票房"
+                android:id="@+id/weekendBoxOffice"
+                />
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="单月票房"
+                android:id="@+id/monthBoxOffice"
+                />
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="年度票房"
+                android:id="@+id/yearBoxOffice"
+                />
+            <Button
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="全球票房"
+                android:id="@+id/worldwideBoxOffice"
+                />
+        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 
 </android.support.constraint.ConstraintLayout>
