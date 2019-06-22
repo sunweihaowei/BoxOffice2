@@ -34,6 +34,11 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+/*
+总结：
+数据类型的转换
+float.valueof();这个是用来转换的，其他的会报错
+*/
 
 public class MainActivity extends AppCompatActivity {
     private Handler handler;
@@ -51,10 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private View view,view1,view2;
 
 
-    private int[] pieData=new int[]{
-            10,20,30,35,5,
-            10,20,30,35,5
-    };
+    private float[] pieData;
     private int[] color=new int[]{
             Color.parseColor( "#356fb3" ),
             Color.parseColor( "#b53633" ),
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     String realTimeBoxOffice = main.getShowapi_res_body().getRealTimeRank().getRealTimeBoxOffice();
                     for (int i = 0; i < 10; i++) {
                         String boxOffice = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxOffice();
-                        float BoxPercent = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxPercent();
+                        double BoxPercent = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getBoxPercent();
                         String Name = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getName();
                         String Rank = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getRank();
                         String ShowDay = main.getShowapi_res_body().getRealTimeRank().getMovieRank().get(i).getShowDay();
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         map.put("SumBoxOffice", SumBoxOffice);
                         mapList.add(map);
                     }
+
                     stateChar=new String[]{
                             mapList.get( 0 ).get( "Name" ).toString(),
                             mapList.get( 1 ).get( "Name" ).toString(),
@@ -131,6 +134,29 @@ public class MainActivity extends AppCompatActivity {
                             mapList.get( 7 ).get( "Name" ).toString(),
                             mapList.get( 8 ).get( "Name" ).toString(),
                             mapList.get( 9 ).get( "Name" ).toString()
+                    };
+                    float value=Float.valueOf( mapList.get( 0 ).get( "BoxPercent" ).toString() );
+                    float value1=Float.valueOf( mapList.get( 1 ).get( "BoxPercent" ).toString() );
+                    float value2=Float.valueOf( mapList.get( 2 ).get( "BoxPercent" ).toString() );
+                    float value3=Float.valueOf( mapList.get( 3 ).get( "BoxPercent" ).toString() );
+                    float value4=Float.valueOf( mapList.get( 4 ).get( "BoxPercent" ).toString() );
+                    float value5=Float.valueOf( mapList.get( 5 ).get( "BoxPercent" ).toString() );
+                    float value6=Float.valueOf( mapList.get( 6 ).get( "BoxPercent" ).toString() );
+                    float value7=Float.valueOf( mapList.get( 7 ).get( "BoxPercent" ).toString() );
+                    float value8=Float.valueOf( mapList.get( 8 ).get( "BoxPercent" ).toString() );
+                    float value9=Float.valueOf( mapList.get( 9 ).get( "BoxPercent" ).toString() );
+
+                   pieData=new float[]{
+                           value,
+                           value1,
+                           value2,
+                           value3,
+                           value4,
+                           value5,
+                           value6,
+                           value7,
+                           value8,
+                           value9,
                     };
                     tv_sumBoxOffice.setText(realTimeBoxOffice);
                     for (int i=0;i<pieData.length;i++){
@@ -167,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     };
                     pcv.setOnValueTouchListener( pieChartOnValueSelectListener );
-
                     MyAdapter adapter = new MyAdapter(MainActivity.this, mapList);
                     lv.setAdapter(adapter);
 

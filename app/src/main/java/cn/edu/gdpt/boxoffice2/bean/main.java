@@ -119,7 +119,7 @@ public class main {
                  */
 
                 private String boxOffice;
-                private float boxPercent;
+                private double boxPercent;
                 private String name;
                 private String rank;
                 private String showDay;
@@ -133,11 +133,11 @@ public class main {
                     this.boxOffice = boxOffice;
                 }
 
-                public float getBoxPercent() {
+                public double getBoxPercent() {
                     return boxPercent;
                 }
 
-                public void setBoxPercent(float boxPercent) {
+                public void setBoxPercent(double boxPercent) {
                     this.boxPercent = boxPercent;
                 }
 
