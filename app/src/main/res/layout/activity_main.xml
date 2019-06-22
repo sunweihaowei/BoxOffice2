@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    tools:context=".MainActivity">
     <LinearLayout
         android:visibility="invisible"
         android:id="@+id/ll_content"
@@ -24,10 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
     </LinearLayout>
-    <!--<com.itheima.PullToRefreshView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pulltorefreshView">-->
     <LinearLayout
         android:id="@+id/ll_main"
         android:visibility="visible"
@@ -125,8 +119,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/lv"></ListView>
-
     </LinearLayout>
-    <!--</com.itheima.PullToRefreshView>-->
-
 </android.support.constraint.ConstraintLayout>

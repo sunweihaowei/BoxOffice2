@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private pagerAdapter pagerAdapter;
     private List<View> viewList=new ArrayList<>();
     private List<String> nameList=new ArrayList<>();
-    private String[] names=new String[]{"饼状图","条形图","线形图"};
+    private String[] names=new String[]{"饼状图","条形图"};
     private PieChartView pcv;
     private ColumnChartView ccv;
     private View view,view1,view2;
@@ -86,17 +86,16 @@ public class MainActivity extends AppCompatActivity {
     private String[] year;
     List<AxisValue> axisXValues=new ArrayList <>(  );
     int[] columnY={
-            100,
-            250,
-            500,
-            1000,
-            1500,
-            2000,
-            2500,
+            10000,
+            5000,
+            4000,
             3000,
+            2000,
+            1000,
+            500,
     };
     List<AxisValue> axisYValues=new ArrayList <>(  );
-    int[] columnValues;
+    float[] columnValues;
     int[] columnColor={
             Color.parseColor( "#356fb3" ),
             Color.parseColor( "#b53633" ),
@@ -186,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     float value8=Float.valueOf( mapList.get( 8 ).get( "BoxPercent" ).toString() );
                     float value9=Float.valueOf( mapList.get( 9 ).get( "BoxPercent" ).toString() );
 
-                    mapList.get( 0 ).get( "boxOffice" ).toString();
+
                    pieData=new float[]{
                            value,
                            value1,
@@ -235,17 +234,29 @@ public class MainActivity extends AppCompatActivity {
                     MyAdapter adapter = new MyAdapter(MainActivity.this, mapList);
                     lv.setAdapter(adapter);
 
-                    columnValues=new int[]{
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500
+
+
+                     float bo= Float.parseFloat( mapList.get( 0 ).get( "boxOffice" ).toString() );
+                     float bo1= Float.parseFloat( mapList.get( 1 ).get( "boxOffice" ).toString() );
+                     float bo2= Float.parseFloat( mapList.get( 2 ).get( "boxOffice" ).toString() );
+                     float bo3= Float.parseFloat( mapList.get( 3 ).get( "boxOffice" ).toString() );
+                     float bo4= Float.parseFloat( mapList.get( 4 ).get( "boxOffice" ).toString() );
+                     float bo5= Float.parseFloat( mapList.get( 5 ).get( "boxOffice" ).toString() );
+                     float bo6= Float.parseFloat( mapList.get( 6 ).get( "boxOffice" ).toString() );
+                     float bo7= Float.parseFloat( mapList.get( 7 ).get( "boxOffice" ).toString() );
+                     float bo8= Float.parseFloat( mapList.get( 8 ).get( "boxOffice" ).toString() );
+                     float bo9= Float.parseFloat( mapList.get( 9 ).get( "boxOffice" ).toString() );//2990.33要用这个Float.parseFloat，39.99用Float.valueOf
+                    columnValues=new float[]{
+                            bo,
+                            bo1,
+                            bo2,
+                            bo3,
+                            bo4,
+                            bo5,
+                            bo6,
+                            bo7,
+                            bo8,
+                            bo9,
                     };
                     for (int i=0;i<5;i++){
                         axisXValues.add( new AxisValue( i ).setLabel( year[i] ) );
@@ -255,8 +266,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Axis axisY=new Axis( axisYValues );
                     axisY.setTextSize( 10 );
+                    axisY.setTextColor( Color.BLACK );
+                    axisY.setHasLines( true );
                     Axis axisX=new Axis( axisXValues );
-                    axisX.setLineColor( 10 );
+                    axisX.setTextColor( Color.BLACK );
+                    axisX.setTextSize( 10 );
+                    axisX.setLineColor( Color.BLACK );
+                    axisX.setHasLines( false );
                     for (int i=0;i<5;i++){
                         List<SubcolumnValue> subcolumnValues=new ArrayList <>(  );
                         subcolumnValues.add( new SubcolumnValue( columnValues[i],columnColor[i] ) );
@@ -295,11 +311,9 @@ public class MainActivity extends AppCompatActivity {
         viewList.add(view);
         view1=View.inflate(MainActivity.this,R.layout.hc_c,null);
         viewList.add(view1);
-        view2=View.inflate(MainActivity.this,R.layout.hc_line,null);
-        viewList.add(view2);
         pcv=view.findViewById( R.id.pie );
         ccv=view1.findViewById( R.id.ccv );
-        for (int i=0;i<3;i++){
+        for (int i=0;i<2;i++){
             nameList.add(names[i]);
         }
     }
@@ -307,7 +321,6 @@ public class MainActivity extends AppCompatActivity {
     private void initcontent() {
         tb.addTab(tb.newTab().setText(nameList.get(0)));
         tb.addTab(tb.newTab().setText(nameList.get(1)));
-        tb.addTab(tb.newTab().setText(nameList.get(2)));
         pagerAdapter=new pagerAdapter( MainActivity.this,viewList,nameList);
         vp.setAdapter(pagerAdapter);
         tb.setupWithViewPager(vp);
@@ -327,7 +340,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(Call call, IOException e) {
                         Log.e(null, "获取网络失败");
                     }
-
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String string = response.body().string();
