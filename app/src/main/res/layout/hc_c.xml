@@ -11,5 +11,5 @@
     <lecho.lib.hellocharts.view.ColumnChartView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pie"/>
+        android:id="@+id/ccv"/>
 </LinearLayout>

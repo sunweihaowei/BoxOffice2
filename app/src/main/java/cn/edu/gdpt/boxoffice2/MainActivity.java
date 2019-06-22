@@ -26,8 +26,14 @@ import cn.edu.gdpt.boxoffice2.Adapter.MyAdapter;
 import cn.edu.gdpt.boxoffice2.Adapter.pagerAdapter;
 import cn.edu.gdpt.boxoffice2.bean.main;
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Column;
+import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.model.SubcolumnValue;
+import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> nameList=new ArrayList<>();
     private String[] names=new String[]{"饼状图","条形图","线形图"};
     private PieChartView pcv;
+    private ColumnChartView ccv;
     private View view,view1,view2;
 
 
@@ -76,6 +83,35 @@ public class MainActivity extends AppCompatActivity {
     private PieChartData data;
 
 
+    private String[] year;
+    List<AxisValue> axisXValues=new ArrayList <>(  );
+    int[] columnY={
+            100,
+            250,
+            500,
+            1000,
+            1500,
+            2000,
+            2500,
+            3000,
+    };
+    List<AxisValue> axisYValues=new ArrayList <>(  );
+    int[] columnValues;
+    int[] columnColor={
+            Color.parseColor( "#356fb3" ),
+            Color.parseColor( "#b53633" ),
+            Color.parseColor( "#86aa3d" ),
+            Color.parseColor( "#6a4b90" ),
+            Color.parseColor( "#2e9cba" ),
+            Color.parseColor( "#356fb3" ),
+            Color.parseColor( "#b53633" ),
+            Color.parseColor( "#86aa3d" ),
+            Color.parseColor( "#6a4b90" ),
+            Color.parseColor( "#2e9cba" )
+    };
+    List<Column> columns=new ArrayList <>(  );
+
+
 
     /*private PullToRefreshView pulltorefreshView;*/
     @Override
@@ -84,16 +120,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
 
-        view=View.inflate(MainActivity.this,R.layout.pie_item,null);
-        viewList.add(view);
-        view1=View.inflate(MainActivity.this,R.layout.hc_line,null);
-        viewList.add(view1);
-        view2=View.inflate(MainActivity.this,R.layout.hc_c,null);
-        viewList.add(view2);
-        pcv=view.findViewById( R.id.pie );
-        for (int i=0;i<3;i++){
-            nameList.add(names[i]);
-        }
+        initVpAndtb();
 
         handler = new Handler() {
             @Override
@@ -124,7 +151,18 @@ public class MainActivity extends AppCompatActivity {
                         map.put("SumBoxOffice", SumBoxOffice);
                         mapList.add(map);
                     }
-
+                    year=new String[]{
+                            mapList.get( 0 ).get("Name" ).toString(),
+                            mapList.get( 1 ).get("Name" ).toString(),
+                            mapList.get( 2 ).get("Name" ).toString(),
+                            mapList.get( 3 ).get("Name" ).toString(),
+                            mapList.get( 4 ).get("Name" ).toString(),
+                            mapList.get( 5 ).get("Name" ).toString(),
+                            mapList.get( 6 ).get("Name" ).toString(),
+                            mapList.get( 7 ).get("Name" ).toString(),
+                            mapList.get( 8 ).get("Name" ).toString(),
+                            mapList.get( 9 ).get("Name" ).toString(),
+                    };
                     stateChar=new String[]{
                             mapList.get( 0 ).get( "Name" ).toString(),
                             mapList.get( 1 ).get( "Name" ).toString(),
@@ -148,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     float value8=Float.valueOf( mapList.get( 8 ).get( "BoxPercent" ).toString() );
                     float value9=Float.valueOf( mapList.get( 9 ).get( "BoxPercent" ).toString() );
 
+                    mapList.get( 0 ).get( "boxOffice" ).toString();
                    pieData=new float[]{
                            value,
                            value1,
@@ -158,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                            value6,
                            value7,
                            value8,
-                           value9,
+                           value9
                     };
                     tv_sumBoxOffice.setText(realTimeBoxOffice);
                     for (int i=0;i<pieData.length;i++){
@@ -188,15 +227,54 @@ public class MainActivity extends AppCompatActivity {
                             data.setCenterText1( stateChar[i] );
                             data.setCenterText2( sliceValue.getValue()+"("+calPercent( i )+")" );
                         }
-
                         @Override
                         public void onValueDeselected() {
-
                         }
                     };
                     pcv.setOnValueTouchListener( pieChartOnValueSelectListener );
                     MyAdapter adapter = new MyAdapter(MainActivity.this, mapList);
                     lv.setAdapter(adapter);
+
+                    columnValues=new int[]{
+                            500,
+                            500,
+                            500,
+                            500,
+                            500,
+                            500,
+                            500,
+                            500,
+                            500,
+                            500
+                    };
+                    for (int i=0;i<5;i++){
+                        axisXValues.add( new AxisValue( i ).setLabel( year[i] ) );
+                    }
+                    for (int i=0;i<6;i++){
+                        axisYValues.add( new AxisValue( i ).setValue( columnY[i] ) );
+                    }
+                    Axis axisY=new Axis( axisYValues );
+                    axisY.setTextSize( 10 );
+                    Axis axisX=new Axis( axisXValues );
+                    axisX.setLineColor( 10 );
+                    for (int i=0;i<5;i++){
+                        List<SubcolumnValue> subcolumnValues=new ArrayList <>(  );
+                        subcolumnValues.add( new SubcolumnValue( columnValues[i],columnColor[i] ) );
+                        columns.add( new Column( subcolumnValues ).setHasLabelsOnlyForSelected( true ) );
+                    }
+
+                    ColumnChartData columnChartData=new ColumnChartData( columns );
+
+                    columnChartData.setAxisXBottom( axisX );
+                    columnChartData.setAxisYLeft( axisY );
+                    columnChartData.setValueLabelTextSize( 20 );
+                    ccv.setColumnChartData( columnChartData );
+
+
+
+
+
+
 
                     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -210,6 +288,20 @@ public class MainActivity extends AppCompatActivity {
         };
         getjson();
         initcontent();
+    }
+
+    private void initVpAndtb() {
+        view= View.inflate( MainActivity.this,R.layout.pie_item,null);
+        viewList.add(view);
+        view1=View.inflate(MainActivity.this,R.layout.hc_c,null);
+        viewList.add(view1);
+        view2=View.inflate(MainActivity.this,R.layout.hc_line,null);
+        viewList.add(view2);
+        pcv=view.findViewById( R.id.pie );
+        ccv=view1.findViewById( R.id.ccv );
+        for (int i=0;i<3;i++){
+            nameList.add(names[i]);
+        }
     }
 
     private void initcontent() {
