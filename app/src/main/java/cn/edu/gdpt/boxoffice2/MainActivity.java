@@ -1,11 +1,13 @@
 package cn.edu.gdpt.boxoffice2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +28,12 @@ import java.util.Map;
 import cn.edu.gdpt.boxoffice2.Adapter.MyAdapter;
 import cn.edu.gdpt.boxoffice2.Adapter.pagerAdapter;
 import cn.edu.gdpt.boxoffice2.bean.main;
+import cn.edu.gdpt.boxoffice2.drawOther.dayActivity;
+import cn.edu.gdpt.boxoffice2.drawOther.mouthActivity;
+import cn.edu.gdpt.boxoffice2.drawOther.weekActivity;
+import cn.edu.gdpt.boxoffice2.drawOther.weekendActivity;
+import cn.edu.gdpt.boxoffice2.drawOther.worldwideActivity;
+import cn.edu.gdpt.boxoffice2.drawOther.yearActivity;
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -111,6 +119,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
     List <Column> columns = new ArrayList <>();
     private Button back;
+    private Button dayBoxOffice;
+    private Button weekBoxOffice;
+    private Button weekendBoxOffice;
+    private Button monthBoxOffice;
+    private Button yearBoxOffice;
+    private Button worldwideBoxOffice;
+    private DrawerLayout dl;
 
 
     /*private PullToRefreshView pulltorefreshView;*/
@@ -360,6 +375,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ll_main = (LinearLayout) findViewById( R.id.ll_main );
         back = (Button) findViewById( R.id.back );
         back.setOnClickListener( this );
+        dayBoxOffice = (Button) findViewById( R.id.dayBoxOffice );
+        dayBoxOffice.setOnClickListener( this );
+        weekBoxOffice = (Button) findViewById( R.id.weekBoxOffice );
+        weekBoxOffice.setOnClickListener( this );
+        weekendBoxOffice = (Button) findViewById( R.id.weekendBoxOffice );
+        weekendBoxOffice.setOnClickListener( this );
+        monthBoxOffice = (Button) findViewById( R.id.monthBoxOffice );
+        monthBoxOffice.setOnClickListener( this );
+        yearBoxOffice = (Button) findViewById( R.id.yearBoxOffice );
+        yearBoxOffice.setOnClickListener( this );
+        worldwideBoxOffice = (Button) findViewById( R.id.worldwideBoxOffice );
+        worldwideBoxOffice.setOnClickListener( this );
+        dl = (DrawerLayout) findViewById( R.id.dl );
+        dl.setOnClickListener( this );
     }
 
     private String calPercent(int i) {//有参数就要return,
@@ -378,6 +407,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.back:
                 ll_content.setVisibility( View.GONE );
                 ll_main.setVisibility( View.VISIBLE );
+                break;
+            case R.id.dayBoxOffice:
+                startActivity( new Intent( MainActivity.this, dayActivity.class ) );
+                break;
+            case R.id.weekBoxOffice:
+                startActivity( new Intent( MainActivity.this, weekActivity.class ) );
+                break;
+            case R.id.weekendBoxOffice:
+                startActivity( new Intent( MainActivity.this, weekendActivity.class ) );
+                break;
+            case R.id.monthBoxOffice:
+                startActivity( new Intent( MainActivity.this, mouthActivity.class ) );
+                break;
+            case R.id.yearBoxOffice:
+                startActivity( new Intent( MainActivity.this, yearActivity.class ) );
+                break;
+            case R.id.worldwideBoxOffice:
+                startActivity( new Intent( MainActivity.this, worldwideActivity.class ) );
                 break;
         }
     }

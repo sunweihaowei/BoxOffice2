@@ -141,11 +141,17 @@
             android:layout_gravity="start"
             android:gravity="center_horizontal"
             >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/draw_title" />
             <TextView
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="其他查询"
-                android:textSize="50dp"
+                android:textSize="30dp"
                 android:textColor="@android:color/black"/>
             <Button
                 android:background="@android:color/transparent"
@@ -163,22 +169,22 @@
                 android:text="单周票房"
                 android:id="@+id/weekBoxOffice"
                 />
+
             <Button
-                android:background="@android:color/transparent"
-                android:paddingHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="周末票房"
                 android:id="@+id/weekendBoxOffice"
-                />
-            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
                 android:background="@android:color/transparent"
                 android:paddingHorizontal="10dp"
+                android:text="周末票房" />
+
+            <Button
+                android:id="@+id/monthBoxOffice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="单月票房"
-                android:id="@+id/monthBoxOffice"
-                />
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="10dp"
+                android:text="单月票房" />
             <Button
                 android:background="@android:color/transparent"
                 android:paddingHorizontal="10dp"
