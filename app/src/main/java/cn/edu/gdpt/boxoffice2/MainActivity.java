@@ -38,6 +38,8 @@ import okhttp3.Response;
 总结：
 数据类型的转换
 float.valueof();这个是用来转换的，其他的会报错
+注意细节，是什么类型的，double类型还是int类型，还是其他的
+HelloChartView不能用double类型
 */
 
 public class MainActivity extends AppCompatActivity {
