@@ -11,19 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".drawOther.worldwideActivity"></activity>
+        <activity android:name=".Main1Activity">
+
+        </activity>
+        <activity android:name=".drawOther.worldwideActivity" />
         <activity android:name=".drawOther.yearActivity" />
         <activity android:name=".drawOther.mouthActivity" />
         <activity android:name=".drawOther.weekendActivity" />
         <activity android:name=".drawOther.weekActivity" />
         <activity android:name=".drawOther.dayActivity" />
-        <activity android:name=".guideActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".guideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
