@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String[] year;
     List <AxisValue> axisXValues = new ArrayList <>();
     int[] columnY = {
-            10000,
-            5000,
-            4000,
-            3000,
-            2000,
+
             1000,
             500,
+            400,
+            300,
+            200,
+            100
     };
     List <AxisValue> axisYValues = new ArrayList <>();
     float[] columnValues;
@@ -281,6 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         axisYValues.add( new AxisValue( i ).setValue( columnY[i] ) );
                     }
                     Axis axisY = new Axis( axisYValues );
+                    axisY.setMaxLabelChars(3);
                     axisY.setTextSize( 10 );
                     axisY.setTextColor( Color.BLACK );
                     axisY.setHasLines( true );
@@ -296,13 +297,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     ColumnChartData columnChartData = new ColumnChartData( columns );
-
                     columnChartData.setAxisXBottom( axisX );
                     columnChartData.setAxisYLeft( axisY );
                     columnChartData.setValueLabelTextSize( 20 );
                     ccv.setColumnChartData( columnChartData );
-
-
                     lv.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView <?> parent, View view, int position, long id) {
@@ -316,7 +314,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getjson();
         initcontent();
     }
-
     private void initVpAndtb() {
         view = View.inflate( MainActivity.this, R.layout.pie_item, null );
         viewList.add( view );
@@ -328,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             nameList.add( names[i] );
         }
     }
-
     private void initcontent() {
         tb.addTab( tb.newTab().setText( nameList.get( 0 ) ) );
         tb.addTab( tb.newTab().setText( nameList.get( 1 ) ) );
@@ -336,7 +332,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vp.setAdapter( pagerAdapter );
         tb.setupWithViewPager( vp );
     }
-
     private void getjson() {
         new Thread() {
             @Override
@@ -364,7 +359,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }.start();
     }
-
     private void initView() {
         tv_sumBoxOffice = (TextView) findViewById( R.id.tv_sumBoxOffice );
         lv = (ListView) findViewById( R.id.lv );
@@ -390,7 +384,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dl = (DrawerLayout) findViewById( R.id.dl );
         dl.setOnClickListener( this );
     }
-
     private String calPercent(int i) {//有参数就要return,
         String result = "";
         int sum = 0;
@@ -400,7 +393,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         result = String.format( "%.2f", (float) pieData[i] * 100 / sum ) + "%";
         return result;
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

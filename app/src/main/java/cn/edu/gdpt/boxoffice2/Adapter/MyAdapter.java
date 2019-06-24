@@ -47,7 +47,7 @@ public class MyAdapter extends BaseAdapter {
         TextView tv_boxOffice=view.findViewById( R.id.tv_boxOffice );
         TextView tv_boxPercent=view.findViewById( R.id.tv_boxPercent );
         tv_boxOffice.setText( mapList.get( position ).get( "boxOffice" ).toString() );
-        tv_boxPercent.setText( mapList.get( position ).get( "BoxPercent" ).toString() );
+        tv_boxPercent.setText( mapList.get( position ).get( "BoxPercent" ).toString()+"%" );
         tv_name.setText( mapList.get( position ).get( "Name" ).toString() );
         power.setText( mapList.get( position ).get( "Rank" ).toString() );
         tv_showDay.setText( mapList.get( position ).get( "ShowDay" ).toString()+"天" );
